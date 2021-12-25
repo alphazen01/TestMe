@@ -132,7 +132,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                     ),
                      TextField(
                       decoration: InputDecoration(
-                        hintText: "Email",
+                        hintText: "Enter Mobile Number",
                         fillColor: Color(0xffF2F2F7),
                         filled: true,
                         enabledBorder: OutlineInputBorder(
