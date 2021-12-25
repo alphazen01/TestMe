@@ -1,7 +1,9 @@
 import 'package:demo/profile.dart';
+import 'package:demo/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldLogIn extends StatelessWidget {
+  static final String path="TextFieldLogIn";
   const TextFieldLogIn({ Key? key }) : super(key: key);
 
   @override
@@ -147,7 +149,9 @@ class TextFieldLogIn extends StatelessWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: (){}, 
+                          onPressed: (){
+                            Navigator.pushNamed(context, TextFieldSignUp.path);
+                          }, 
                           child: Text(
                             "Sign Up",
                             style: TextStyle(

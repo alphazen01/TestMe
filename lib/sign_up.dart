@@ -1,8 +1,11 @@
+import 'package:demo/profile_bio.dart';
+import 'package:demo/user_list.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldSignUp extends StatefulWidget {
+  static final String path="TextFieldSignUp";
   const TextFieldSignUp({ Key? key }) : super(key: key);
-
+  
   @override
   State<TextFieldSignUp> createState() => _TextFieldSignUpState();
 }
@@ -205,7 +208,9 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         child:TextButton(
-                              onPressed: (){}, 
+                              onPressed: (){
+                                Navigator.pushNamed(context, UserList.path);
+                              }, 
                               child:  Text(
                             "Sign up",
                              style: TextStyle(
@@ -224,7 +229,9 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                               ),
                             ),
                             TextButton(
-                              onPressed: (){}, 
+                              onPressed: (){
+                                Navigator.pushNamed(context, ProfileBio.path);
+                              }, 
                               child: Text(
                                 "Login",
                                 style: TextStyle(
