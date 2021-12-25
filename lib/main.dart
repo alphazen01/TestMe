@@ -14,8 +14,8 @@ void main() {
     // home: TextFieldLogIn(),
     // home: TextFieldSignUp(),
     // home: ProfileBio(),
-    // home: UserList(),
-    home: AddNewUser(),
+    home: UserList(),
+    // home: AddNewUser(),
    )
    );
 }

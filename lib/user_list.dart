@@ -10,6 +10,15 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList> {
+  int count=0;
+
+  _onCountPressed(){
+    setState(() {
+      count++;
+    });
+  }
+
+
    int selectedIndex=0;
    List<Widget>screens=[
      Container(
@@ -131,7 +140,9 @@ class _UserListState extends State<UserList> {
                       color: Colors.black
                     ),
                     ), 
-                  onPressed: () {},
+                  onPressed: () {
+                    _showDialog(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     primary:Color(0xffF2F2F7).withOpacity(0.52),
                     shape: RoundedRectangleBorder(
@@ -182,3 +193,42 @@ class _UserListState extends State<UserList> {
   }
 }
 
+_showDialog(BuildContext context){
+  showDialog(
+    barrierDismissible: false,
+  context: context, 
+  builder:(BuildContext context){
+    return AlertDialog(
+    title: Text("are you sure ?"),
+    
+    
+    actions: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ElevatedButton(
+            onPressed: (){
+             Navigator.pop(context);
+            }, 
+            child: Text("Cancel"),
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xffC4C4C4).withOpacity(0.52)
+            ),
+            ),
+            ElevatedButton(
+        onPressed: (){
+          
+        }, 
+        child: Text("Confirm"),
+         style: ElevatedButton.styleFrom(
+          primary: Color(0xffEA4242).withOpacity(0.52)
+            ),
+        ),
+        ],
+      ),
+         
+    ],
+    );
+  } 
+  );
+}
