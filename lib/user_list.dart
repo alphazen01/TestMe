@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 
 class UserList extends StatefulWidget {
+  static final String path="UserList";
   const UserList({ Key? key }) : super(key: key);
 
   @override

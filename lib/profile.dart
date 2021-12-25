@@ -1,8 +1,11 @@
-import 'dart:ui';
 
+
+import 'package:demo/login.dart';
+import 'package:demo/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
+  static final String path="ProfileScreen";
   const ProfileScreen({ Key? key }) : super(key: key);
 
   @override
@@ -62,7 +65,9 @@ class ProfileScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)
                   ),
                   child:TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.pushNamed(context, TextFieldLogIn.path);
+                      }, 
                       child:  Text(
                     "Login",
                      style: TextStyle(
@@ -84,7 +89,9 @@ class ProfileScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)
                   ),
                   child:  TextButton(
-                        onPressed: (){}, 
+                        onPressed: (){
+                          
+                        }, 
                         child:  Text(
                       "Sign up",
                        style: TextStyle(

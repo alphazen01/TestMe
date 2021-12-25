@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddNewUser extends StatefulWidget {
+  static final String path="AddNewUser";
   const AddNewUser({ Key? key }) : super(key: key);
 
   @override

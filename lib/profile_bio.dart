@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileBio extends StatefulWidget {
+  static final String path="ProfileBio";
 
   const ProfileBio({ Key? key }) : super(key: key);
 

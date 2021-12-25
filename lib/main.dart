@@ -1,3 +1,5 @@
+
+
 import 'package:demo/add_new_user.dart';
 import 'package:demo/login.dart';
 import 'package:demo/profile.dart';
@@ -14,8 +16,18 @@ void main() {
     // home: TextFieldLogIn(),
     // home: TextFieldSignUp(),
     // home: ProfileBio(),
-    home: UserList(),
+    // home: UserList(),
     // home: AddNewUser(),
+    initialRoute: ProfileScreen.path,
+    routes: {
+      ProfileScreen.path:(context)=>ProfileScreen(),
+      TextFieldLogIn.path:(context)=>TextFieldLogIn(),
+      TextFieldSignUp.path:(context)=>TextFieldSignUp(),
+      ProfileBio.path:(context)=>ProfileBio(),
+      UserList.path:(context)=>UserList(),
+      AddNewUser.path:(context)=>AddNewUser(),
+
+    },
    )
    );
 }
