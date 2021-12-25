@@ -1,3 +1,4 @@
+import 'package:demo/add_new_user.dart';
 import 'package:demo/login.dart';
 import 'package:demo/profile.dart';
 import 'package:demo/profile_bio.dart';
@@ -13,7 +14,8 @@ void main() {
     // home: TextFieldLogIn(),
     // home: TextFieldSignUp(),
     // home: ProfileBio(),
-    home: UserList(),
+    // home: UserList(),
+    home: AddNewUser(),
    )
    );
 }
