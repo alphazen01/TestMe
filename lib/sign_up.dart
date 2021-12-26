@@ -45,6 +45,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                     ),
                     Center(
                       child: Stack(
+                        clipBehavior: Clip.none,
                         alignment: Alignment.topLeft,
                         children: [
                           CircleAvatar(
@@ -54,10 +55,19 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                             ),
                           ),
                           Positioned(
-                           top: 90,
-                            child: CircleAvatar(
-                              radius: 20,
-                              // backgroundImage: AssetImage("assets/"),
+                            bottom: -5,
+                            left: 0,
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.red,
+                                child: InkWell(
+                                  onTap: (){},
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundImage: AssetImage("assets/bx_bxs-camera.png"),
+                                  ),
+                                ),
+                              ),
                             ),
                           )
                          
