@@ -1,16 +1,45 @@
+import 'package:demo/login.dart';
 import 'package:demo/profile_bio.dart';
 import 'package:demo/user_list.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TextFieldSignUp extends StatefulWidget {
   static final String path="TextFieldSignUp";
-  const TextFieldSignUp({ Key? key }) : super(key: key);
+  final TextEditingController?controller;
+  final String?onTap;
+  const TextFieldSignUp({ Key? key,
+  this.controller,this.onTap }) : super(key: key);
   
   @override
   State<TextFieldSignUp> createState() => _TextFieldSignUpState();
 }
 
 class _TextFieldSignUpState extends State<TextFieldSignUp> {
+  bool isLoading=false;
+  Future signUp()async{
+    setState(() {
+      isLoading=true;
+    });
+    try{
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: emailController.text,
+    password: passwordController.text
+  );
+  if(userCredential.user != null){
+    Route route =MaterialPageRoute(builder: (ctx)=>TextFieldLogIn());
+    Navigator.push(context, route);
+    
+  }
+  }catch(e){
+  print("Error:$e");
+  }
+  setState(() {
+    isLoading=false;
+  });
+  }
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController =TextEditingController();
   int _value=1;
   @override
   Widget build(BuildContext context) {
@@ -96,6 +125,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                       height: 12,
                     ),
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         hintText: "Email",
                         fillColor: Color(0xffF2F2F7),
@@ -114,6 +144,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                       height: 12,
                     ),
                     TextField(
+                      controller: passwordController,
                        keyboardType: TextInputType.text,
                        obscureText: true,
                        obscuringCharacter: "*",
@@ -217,9 +248,9 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child:TextButton(
+                        child: isLoading?CircularProgressIndicator():TextButton(
                               onPressed: (){
-                                Navigator.pushNamed(context, UserList.path);
+                                signUp();
                               }, 
                               child:  Text(
                             "Sign up",

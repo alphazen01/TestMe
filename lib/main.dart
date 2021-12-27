@@ -5,28 +5,40 @@ import 'package:demo/profile_bio.dart';
 import 'package:demo/sign_up.dart';
 import 'package:demo/user_list.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(
-   MaterialApp(
-     debugShowCheckedModeBanner: false,
-    //  home: ProfileScreen()
-    // home: TextFieldLogIn(),
-    // home: TextFieldSignUp(),
-    // home: ProfileBio(),
-    // home: UserList(),
-    // home: AddNewUser(),
-    initialRoute: ProfileScreen.path,
-    routes: {
-      ProfileScreen.path:(context)=>ProfileScreen(),
-      TextFieldLogIn.path:(context)=>TextFieldLogIn(),
-      TextFieldSignUp.path:(context)=>TextFieldSignUp(),
-      ProfileBio.path:(context)=>ProfileBio(),
-      UserList.path:(context)=>UserList(),
-      AddNewUser.path:(context)=>AddNewUser(),
+ Future<void> main()async {
+   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
+   runApp(const MyApp());
+   }
 
-    },
-   )
-   );
+class MyApp extends StatelessWidget {
+  const MyApp({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+     //  home: ProfileScreen()
+     // home: TextFieldLogIn(),
+     // home: TextFieldSignUp(),
+     // home: ProfileBio(),
+     // home: UserList(),
+     // home: AddNewUser(),
+     initialRoute: ProfileScreen.path,
+     routes: {
+       ProfileScreen.path:(context)=>ProfileScreen(),
+       TextFieldLogIn.path:(context)=>TextFieldLogIn(),
+       TextFieldSignUp.path:(context)=>TextFieldSignUp(),
+       ProfileBio.path:(context)=>ProfileBio(),
+       UserList.path:(context)=>UserList(),
+       AddNewUser.path:(context)=>AddNewUser(),
+
+     },
+    );
+  }
 }
 
