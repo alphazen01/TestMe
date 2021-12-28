@@ -1,7 +1,7 @@
 
 
 import 'package:demo/login.dart';
-import 'package:demo/sign_up.dart';
+// import 'package:demo/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {

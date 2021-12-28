@@ -1,33 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AddNewUser extends StatefulWidget {
-  static final String path="AddNewUser";
-  const AddNewUser({ Key? key }) : super(key: key);
+class CustomNewUser extends StatefulWidget {
+  const CustomNewUser({ Key? key }) : super(key: key);
 
   @override
-  State<AddNewUser> createState() => _AddNewUserState();
+  State<CustomNewUser> createState() => _CustomNewUserState();
 }
 
-class _AddNewUserState extends State<AddNewUser> {
-  int _value=1;
-   int selectedIndex=0;
-   List<Widget>screens=[
-     Container(
-        width: double.infinity,
-     height: double.infinity,
-       color: Colors.red,
-     ),
-      Container(
-         width: double.infinity,
-     height: double.infinity,
-       color: Colors.green,
-     ), 
-     Container(
-        width: double.infinity,
-     height: double.infinity,
-       color: Colors.orange,
-     )
-   ];
+class _CustomNewUserState extends State<CustomNewUser> {
+   int _value=1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +24,8 @@ class _AddNewUserState extends State<AddNewUser> {
                    child: Text(
                       "Add new User",
                       style: TextStyle(
-                        fontSize:18
+                        fontSize:18,
+                        fontWeight: FontWeight.w500
                       ),
                     ),
                  ),
@@ -56,21 +38,32 @@ class _AddNewUserState extends State<AddNewUser> {
                   ),
                   Center(
                     child: Stack(
-                alignment: Alignment.topLeft,
-                children: [
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.topLeft,
+                    children: [
                     CircleAvatar(
                       radius: 60,
                       backgroundImage: AssetImage(
                         "assets/pubg.jpg",
                       ),
                     ),
-                    Positioned(
-                      top: 90,
-                      child: CircleAvatar(
-                        radius: 20,
-                        // backgroundImage: AssetImage("assets/"),
+                    Transform.translate(
+                        offset: Offset(-5,90),
+                       child: ElevatedButton(
+                           onPressed: () {
+                             
+                           },
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
                           ),
-                        ) 
+                          style: ElevatedButton.styleFrom(
+                              shape: CircleBorder(),
+                              primary: Colors.black 
+                             
+                          ),
+                        ),
+                           )
                       ],
                     ),
                   ),
@@ -232,38 +225,6 @@ class _AddNewUserState extends State<AddNewUser> {
               ],
             ),
           ),
-        ),
-      ),
-      //  screens.elementAt(selectedIndex),
-     
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40)
-        ),
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Image.asset("assets/Vector (3).png"),
-              label: "Home"
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person) ,
-              label: "person"
-            ),BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "share"
-            ),
-          ],
-          onTap: (int index){
-            setState(() {
-              selectedIndex=index;
-            });
-          },
-          currentIndex: selectedIndex,
-          backgroundColor: Colors.black,
-          selectedItemColor: Colors.red,
-          unselectedItemColor: Colors.white,
         ),
       ),
     );

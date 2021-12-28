@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:demo/login.dart';
-import 'package:demo/profile_bio.dart';
-import 'package:demo/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TextFieldSignUp extends StatefulWidget {
   static final String path="TextFieldSignUp";
@@ -37,7 +38,19 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
   setState(() {
     isLoading=false;
   });
+  
   }
+  var imagePath;
+  Future pickedImage()async{
+    final ImagePicker _picker = ImagePicker();
+    final XFile?image=await _picker.pickImage(source: ImageSource.camera);
+  if(image !=null){
+    setState(() {
+      imagePath=File(image.path);
+    });
+  }
+  }
+  
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController =TextEditingController();
   int _value=1;
@@ -60,7 +73,12 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                          child: Row(
                            children: [
                              Icon(Icons.arrow_back_ios),
-                             Text("Back"),
+                            TextButton(
+                              onPressed: (){
+                                Navigator.pop(context);
+                              }, 
+                              child: Text("Back")
+                            )
                            ],
                          ),
                          ),
@@ -76,29 +94,33 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                       child: Stack(
                         clipBehavior: Clip.none,
                         alignment: Alignment.topLeft,
-                        children: [
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundImage: AssetImage(
-                              "assets/pubg.jpg",
-                            ),
+                        children: [ 
+                         imagePath != null ? CircleAvatar(
+                        radius: 60,
+                        backgroundImage :  FileImage(imagePath) 
+                      ) : CircleAvatar(
+                        radius: 60,
+                        backgroundImage :  AssetImage("assets/pubg.jpg")  
+                      ),
+                           Transform.translate(
+                        offset: Offset(
+                          -5, 90
+                        ),
+                        child: ElevatedButton(
+                           onPressed: () {
+                             pickedImage();
+                           },
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
                           ),
-                          Positioned(
-                            bottom: -5,
-                            left: 0,
-                            child: ClipOval(
-                              child: Material(
-                                color: Colors.red,
-                                child: InkWell(
-                                  onTap: (){},
-                                  child: CircleAvatar(
-                                    radius: 20,
-                                    backgroundImage: AssetImage("assets/bx_bxs-camera.png"),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
+                          style: ElevatedButton.styleFrom(
+                              shape: CircleBorder(),
+                              primary: Colors.black 
+                             
+                          ),
+                        ),
+                           )
                          
                         ],
                       ),
@@ -240,7 +262,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                     ),  
                       ],
                     ),
-                    Container(
+                   isLoading?CircularProgressIndicator(): Container(
                         
                         width: double.infinity,
                         height: 48,
@@ -248,7 +270,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: isLoading?CircularProgressIndicator():TextButton(
+                        child: TextButton(
                               onPressed: (){
                                 signUp();
                               }, 
@@ -271,7 +293,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                             ),
                             TextButton(
                               onPressed: (){
-                                Navigator.pushNamed(context, ProfileBio.path);
+                                Navigator.pushNamed(context, TextFieldLogIn.path);
                               }, 
                               child: Text(
                                 "Login",

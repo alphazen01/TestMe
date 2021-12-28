@@ -1,5 +1,7 @@
-import 'package:demo/add_new_user.dart';
+
+
 import 'package:demo/login.dart';
+import 'package:demo/new_user.dart';
 import 'package:demo/profile.dart';
 import 'package:demo/profile_bio.dart';
 import 'package:demo/sign_up.dart';
@@ -22,12 +24,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-     //  home: ProfileScreen()
-     // home: TextFieldLogIn(),
-     // home: TextFieldSignUp(),
-     // home: ProfileBio(),
-     // home: UserList(),
-     // home: AddNewUser(),
+    //   home: ProfileScreen()
+    //  home: TextFieldLogIn(),
+    //  home: TextFieldSignUp(),
+    //  home: ProfileBio(),
+    //  home: UserList(),
+    //  home: AddNewUser(),
      initialRoute: ProfileScreen.path,
      routes: {
        ProfileScreen.path:(context)=>ProfileScreen(),
@@ -35,9 +37,10 @@ class MyApp extends StatelessWidget {
        TextFieldSignUp.path:(context)=>TextFieldSignUp(),
        ProfileBio.path:(context)=>ProfileBio(),
        UserList.path:(context)=>UserList(),
-       AddNewUser.path:(context)=>AddNewUser(),
+       NewUser.path:(context)=>NewUser()
 
      },
+    
     );
   }
 }

@@ -11,73 +11,18 @@ class ProfileBio extends StatefulWidget {
 
 class _ProfileBioState extends State<ProfileBio> {
    int selectedIndex=0;
-   List<Color>clr=[
-     Colors.red,
-     Colors.green,
-     Colors.white
-   ];
-   List<Widget>screens=[
-     Container(
-        width: double.infinity,
-     height: double.infinity,
-       color: Colors.red,
-     ),
-      Container(
-         width: double.infinity,
-     height: double.infinity,
-       color: Colors.green,
-     ), 
-     CustomProfile(),
-   ];
+  //  List<Color>clr=[
+  //    Colors.green,
+  //    Colors.green,
+  //    Colors.green
+  //  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: clr[selectedIndex],
-      body: 
-      screens.elementAt(selectedIndex),
      
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40)
-        ),
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Image.asset("assets/Vector (3).png"),
-              label: "Home"
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person) ,
-              label: "person"
-            ),BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "share"
-            ),
-          ],
-          onTap: (int index){
-            setState(() {
-              selectedIndex=index;
-            });
-          },
-          currentIndex: selectedIndex,
-          backgroundColor: Colors.black,
-          selectedItemColor: Colors.red,
-          unselectedItemColor: Colors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class CustomProfile extends StatelessWidget {
-  const CustomProfile({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
+      // backgroundColor: clr[selectedIndex],
+      body: SafeArea(
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -164,6 +109,13 @@ class CustomProfile extends StatelessWidget {
         ),
       ),
       
+    ),
     );
   }
 }
+
+
+
+
+
+
