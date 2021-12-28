@@ -1,10 +1,13 @@
+import 'package:demo/new_user.dart';
+import 'package:demo/profile_bio.dart';
 import 'package:flutter/material.dart';
 
 
 
 class UserList extends StatefulWidget {
   static final String path="UserList";
-  const UserList({ Key? key }) : super(key: key);
+  
+  const UserList({ Key? key, }) : super(key: key);
 
   @override
   State<UserList> createState() => _UserListState();
@@ -23,8 +26,8 @@ class _UserListState extends State<UserList> {
    int selectedIndex=0;
      List<Color>clr=[
      Colors.red,
-     Colors.green,
-     Colors.white
+     Colors.teal,
+     Colors.yellow
    ];
    List<Widget>screens=[
      Container(
@@ -32,12 +35,13 @@ class _UserListState extends State<UserList> {
      height: double.infinity,
        color: Colors.red,
      ),
-      Container(
-         width: double.infinity,
-     height: double.infinity,
-       color: Colors.green,
-     ), 
-    CustomUser(),
+     CustomUser(
+       onTap: (){
+        
+       },
+     ),
+     ProfileBio()
+    
    ];
   @override
   Widget build(BuildContext context) {
@@ -58,10 +62,10 @@ class _UserListState extends State<UserList> {
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.person) ,
-                      label: "person"
+                      label: "USERS"
                     ),BottomNavigationBarItem(
                       icon: Icon(Icons.person),
-                      label: "share"
+                      label: "PROFILE"
                     ),
                   ],
                   onTap: (int index){
@@ -80,8 +84,9 @@ class _UserListState extends State<UserList> {
 }
 
 class CustomUser extends StatelessWidget {
+  final VoidCallback?onTap;
   const CustomUser({
-    Key? key,
+    Key? key,this.onTap
   }) : super(key: key);
 
   @override
@@ -122,7 +127,9 @@ class CustomUser extends StatelessWidget {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: (){
+                     Navigator.pushNamed(context, NewUser.path);
+                  },
                   child: Row(
                     children: [
                        Icon(Icons.person_outline),
