@@ -8,6 +8,7 @@ class CustomNewUser extends StatefulWidget {
 }
 
 class _CustomNewUserState extends State<CustomNewUser> {
+ 
    int _value=1;
   @override
   Widget build(BuildContext context) {

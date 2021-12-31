@@ -26,8 +26,8 @@ class _UserListState extends State<UserList> {
    int selectedIndex=0;
      List<Color>clr=[
      Colors.red,
-     Colors.teal,
-     Colors.yellow
+     Colors.white,
+     Colors.white
    ];
    List<Widget>screens=[
      Container(

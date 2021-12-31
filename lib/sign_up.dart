@@ -1,9 +1,18 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/login.dart';
+import 'package:demo/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+
+
+
+
+
 
 class TextFieldSignUp extends StatefulWidget {
   static final String path="TextFieldSignUp";
@@ -17,18 +26,40 @@ class TextFieldSignUp extends StatefulWidget {
 }
 
 class _TextFieldSignUpState extends State<TextFieldSignUp> {
+  
+  
   bool isLoading=false;
+  var imagePath;
+  var imageUrl;
+  String _value="Male";
+
+TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController =TextEditingController();
+   TextEditingController nameController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+
+
+
   Future signUp()async{
     setState(() {
       isLoading=true;
     });
     try{
-    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    UserCredential userCredential = await
+     FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: emailController.text,
     password: passwordController.text
   );
   if(userCredential.user != null){
-    Route route =MaterialPageRoute(builder: (ctx)=>TextFieldLogIn());
+    createProfile(
+          nameController.text,
+          emailController.text,
+          mobileController.text,
+          _value.toString(),
+          imageUrl.toString(),
+        );
+    Route route =MaterialPageRoute(
+      builder: (ctx)=>TextFieldLogIn());
     Navigator.push(context, route);
     
   }
@@ -40,20 +71,54 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
   });
   
   }
-  var imagePath;
+  
   Future pickedImage()async{
     final ImagePicker _picker = ImagePicker();
-    final XFile?image=await _picker.pickImage(source: ImageSource.camera);
+    final XFile?image=await _picker.pickImage(
+      source: ImageSource.gallery
+      );
   if(image !=null){
     setState(() {
       imagePath=File(image.path);
     });
+    uploadProfileImage();
   }
   }
   
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController =TextEditingController();
-  int _value=1;
+    Future uploadProfileImage() async {
+      String image = imagePath.toString();
+      var _image = image.split("/")[6];
+      print("image ${_image}");
+      Reference reference = FirebaseStorage.instance.ref()
+          .child('profileImage/${_image}');
+      UploadTask uploadTask = reference.putFile(imagePath);
+
+      TaskSnapshot snapshot = await uploadTask;
+      imageUrl = await snapshot.ref.getDownloadURL();
+
+    }
+    Future createProfile(fullName,email,mobile,gender,profileImage)async{
+     CollectionReference users = FirebaseFirestore.instance.collection('users');
+    try{
+      return users
+        .add({
+          'full_name': fullName,
+          'email': email, 
+          'mobile': mobile ,
+          'gender': gender,
+          'profile_image': profileImage
+        })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+      }catch(e){
+        print(e);
+      } 
+    }
+   
+  
+  
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,25 +130,20 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                  Row(
-                      children: [
-                        TextButton(
-                         onPressed: (){
-                           
-                         }, 
-                         child: Row(
-                           children: [
-                             Icon(Icons.arrow_back_ios),
-                            TextButton(
-                              onPressed: (){
-                                Navigator.pop(context);
-                              }, 
-                              child: Text("Back")
-                            )
-                           ],
-                         ),
-                         ),
-                      ],
-                    ),
+                    children: [
+                      TextButton(
+                       onPressed: (){
+                         Navigator.pop(context, ProfileScreen.path);
+                       }, 
+                       child: Row(
+                         children: [
+                           Icon(Icons.arrow_back_ios),
+                           Text("Back"),
+                         ],
+                       ),
+                       ),
+                    ],
+                  ),
                     Text(
                       "Sign Up",
                       style: TextStyle(
@@ -129,6 +189,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                       height: 35,
                     ),
                     TextField(
+                      controller: nameController,
                       decoration: InputDecoration(
                         hintText: "Name",
                         fillColor: Color(0xffF2F2F7),
@@ -197,6 +258,7 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                       height: 12,
                     ),
                      TextField(
+                       controller: mobileController,
                       decoration: InputDecoration(
                         hintText: "Enter Mobile Number",
                         fillColor: Color(0xffF2F2F7),
@@ -226,11 +288,11 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                         Row(
                           children: [
                             Radio(
-                              value: 1, 
+                              value: "Male", 
                               groupValue: _value, 
                               onChanged: (value){
                                  setState(() {
-                                   _value=1;
+                                   _value="Male";
                                  });
                               }
                             ),
@@ -246,11 +308,11 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
                         Row(
                       children: [
                         Radio(
-                          value: 2, 
+                          value: "Female", 
                           groupValue: _value, 
                           onChanged: (value){
                              setState(() {
-                               _value=2;
+                               _value="Female";
                              });
                           }
                         ),
@@ -316,3 +378,4 @@ class _TextFieldSignUpState extends State<TextFieldSignUp> {
     );
   }
 }
+

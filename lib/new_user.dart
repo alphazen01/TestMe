@@ -1,5 +1,8 @@
+
+
 import 'package:demo/widgets/custom_new_user.dart';
 import 'package:flutter/material.dart';
+
 
 class NewUser extends StatefulWidget {
   static final String path="NewUser";
@@ -11,6 +14,11 @@ class NewUser extends StatefulWidget {
 
 class _NewUserState extends State<NewUser> {
    int selectedIndex=0;
+   List<Color>clr=[
+     Colors.red,
+     Colors.green,
+     Colors.white
+   ];
    List<Widget>screens=[
      Container(
         width: double.infinity,
@@ -27,6 +35,7 @@ class _NewUserState extends State<NewUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: clr[selectedIndex],
       body:screens.elementAt(selectedIndex),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(

@@ -19,8 +19,7 @@ class _ProfileBioState extends State<ProfileBio> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     
+    return Scaffold( 
       // backgroundColor: clr[selectedIndex],
       body: SafeArea(
       child: SingleChildScrollView(
