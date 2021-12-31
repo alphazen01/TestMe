@@ -1,6 +1,7 @@
 
 
 import 'package:demo/login.dart';
+import 'package:demo/sign_up.dart';
 // import 'package:demo/sign_up.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +12,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-       
        body: Container(
          decoration: BoxDecoration(
            image: DecorationImage(
@@ -90,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   child:  TextButton(
                         onPressed: (){
-                          
+                         Navigator.pushNamed(context, TextFieldSignUp.path);
                         }, 
                         child:  Text(
                       "Sign up",
