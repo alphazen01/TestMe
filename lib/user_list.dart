@@ -1,109 +1,73 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/new_user.dart';
-import 'package:demo/profile_bio.dart';
 import 'package:flutter/material.dart';
-
-
 
 class UserList extends StatefulWidget {
   static final String path="UserList";
-  
-  const UserList({ Key? key, }) : super(key: key);
+  const UserList({ Key? key }) : super(key: key);
 
   @override
   State<UserList> createState() => _UserListState();
 }
 
 class _UserListState extends State<UserList> {
-  int count=0;
+   int count=0;
 
+  // ignore: unused_element
   _onCountPressed(){
     setState(() {
       count++;
     });
   }
 
+  List _user=[];
+  Future getUser()async{
+   CollectionReference instance=  FirebaseFirestore.instance.collection('users');
+   instance .get().then((QuerySnapshot querySnapshot) {
+       _user =querySnapshot.docs;
+       print("_user:$_user");
+    });
+  }
+  @override
+  void initState() {
+   getUser();
+    super.initState();
+  }
 
-   int selectedIndex=0;
-     List<Color>clr=[
-     Colors.red,
-     Colors.white,
-     Colors.white
-   ];
-   List<Widget>screens=[
-     Container(
-        width: double.infinity,
-     height: double.infinity,
-       color: Colors.red,
-     ),
-     CustomUser(
-       onTap: (){
-        
-       },
-     ),
-     ProfileBio()
-    
-   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: clr[selectedIndex],
-      body: screens.elementAt(selectedIndex),
-      
-              bottomNavigationBar: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40)
-                ),
-                child: BottomNavigationBar(
-                  items: [
-                    BottomNavigationBarItem(
-                      icon: Image.asset("assets/Vector (3).png"),
-                      label: "Home"
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.person) ,
-                      label: "USERS"
-                    ),BottomNavigationBarItem(
-                      icon: Icon(Icons.person),
-                      label: "PROFILE"
-                    ),
-                  ],
-                  onTap: (int index){
-                    setState(() {
-                      selectedIndex=index;
-                    });
-                  },
-                  currentIndex: selectedIndex,
-                  backgroundColor: Colors.black,
-                  selectedItemColor: Colors.red,
-                  unselectedItemColor: Colors.white,
-                ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Row(
+            children: [
+              Icon(Icons.arrow_back_ios,color: Colors.blue,),
+              Text(
+              "Back",
+              style: TextStyle(
+                color:Colors.blue,
               ),
-    );
-  }
-}
-
-class CustomUser extends StatelessWidget {
-  final VoidCallback?onTap;
-  const CustomUser({
-    Key? key,this.onTap
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Text(
+            ), 
+            ],
+          ),
+        ),
+        centerTitle: true,
+        title: Text(
             "User List",
             style: TextStyle(
-              fontSize:18
+              fontSize:18,
+              color:Colors.black,
+              fontWeight: FontWeight.w700
             ),
-          ),
-          Divider(
-            thickness: 1,
-            color: Colors.grey,
-          ),
+          ), 
+      ),
+      body:  Column(
+        children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -175,17 +139,17 @@ class CustomUser extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: 25,
+              itemCount: _user.length,
               itemBuilder: (BuildContext context,int index){
                 return ListTile(
               leading: 
                   
               CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage("assets/pubg.jpg"),
+              backgroundImage: NetworkImage("${_user[index]["profile_image"]}")
               ),
-              title: Text("Name"),
-              subtitle: Text("Email"),
+              title: Text("${_user[index]["full_name"]}"),
+              subtitle: Text("${_user[index]["email"]}"),
               trailing:  ElevatedButton(
                 child: Text(
                   'Remove',
@@ -250,6 +214,6 @@ _showDialog(BuildContext context){
          
     ],
     );
-  } 
-  );
-}
+  } ,
+    );
+  }
