@@ -1,5 +1,6 @@
 
 
+
 import 'package:demo/login.dart';
 import 'package:demo/new_user.dart';
 import 'package:demo/profile.dart';
@@ -10,10 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
  Future<void> main()async {
-   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+  init();
    runApp(const MyApp());
    }
+   Future init()async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -30,6 +34,7 @@ class MyApp extends StatelessWidget {
     //  home: ProfileBio(),
     //  home: UserList(),
     //  home: AddNewUser(),
+    home: const ProfileScreen(),
      initialRoute: ProfileScreen.path,
      routes: {
        ProfileScreen.path:(context)=>ProfileScreen(),

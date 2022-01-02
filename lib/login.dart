@@ -1,7 +1,7 @@
+
+import 'package:demo/bottom_navigation.dart';
 import 'package:demo/profile.dart';
-// import 'package:demo/profile_bio.dart';
 import 'package:demo/sign_up.dart';
-import 'package:demo/user_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class _TextFieldLogInState extends State<TextFieldLogIn> {
     password: passwordController.text
   );
   if(userCredential.user != null){
-    Route route =MaterialPageRoute(builder: (ctx)=>UserList());
+    Route route =MaterialPageRoute(builder: (ctx)=>BottomNavigation());
     Navigator.push(context, route);
     
   }

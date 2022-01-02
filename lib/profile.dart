@@ -43,11 +43,16 @@ class ProfileScreen extends StatelessWidget {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(5)
                     ),
-                    child: Text(
-                      "  USER AUTHENTICA",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 19,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Center(
+                        child: Text(
+                          "  USER AUTHENTICA",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19,
+                          ),
+                        ),
                       ),
                     ),
                   ),
