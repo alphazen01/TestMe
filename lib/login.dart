@@ -1,6 +1,6 @@
 
 import 'package:demo/bottom_navigation.dart';
-import 'package:demo/profile.dart';
+import 'package:demo/screens/welcome.dart';
 import 'package:demo/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class _TextFieldLogInState extends State<TextFieldLogIn> {
                     children: [
                       TextButton(
                        onPressed: (){
-                         Navigator.pop(context, ProfileScreen);
+                         Navigator.pop(context, WelcomeScreen);
                        }, 
                        child: Row(
                          children: [

@@ -163,7 +163,7 @@ TextEditingController emailController = TextEditingController();
                         backgroundImage :  FileImage(imagePath) 
                       ) : CircleAvatar(
                         radius: 60,
-                        backgroundImage :  AssetImage("assets/pubg.jpg")  
+                        backgroundImage :  AssetImage("assets/profile_avatar.png")  
                       ),
                     Transform.translate(
                         offset: Offset(-5,90),

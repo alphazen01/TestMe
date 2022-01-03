@@ -28,8 +28,8 @@ class _UserListState extends State<UserList> {
        print("_user:$_user");
     });
   }
-  int countTotalUser(List _user){
-    return _user.length;
+  int countTotalUser(List user){
+    return user.length;
   }
   @override
   void initState() {
@@ -69,113 +69,118 @@ class _UserListState extends State<UserList> {
             ),
           ), 
       ),
-      body:  Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Icon(Icons.person),
-                    Text(
-                      "Total User",
-                      style: TextStyle(
-                        fontSize: 14
-                      ),
-                    ),
-                    Text(
-                      "${(countTotalUser)(_user)}",
-                      style: TextStyle(
-                        fontSize: 14
-                      ),
-                    )
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: (){
-                     Navigator.pushNamed(context, NewUser.path);
-                  },
-                  child: Row(
+      body:  Padding(
+        padding: const EdgeInsets.only(top: 40),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     children: [
-                       Icon(Icons.person_outline),
-                       Text("Add new User")
+                      Icon(Icons.person,size: 40,),
+                      Text(
+                        "Total User",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700
+                        ),
+                      ),
+                      Text(
+                        "${(countTotalUser)(_user)}",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500
+                        ),
+                      )
                     ],
                   ),
+                  ElevatedButton(
+                    onPressed: (){
+                       Navigator.pushNamed(context, NewUser.path);
+                    },
+                    child: Row(
+                      children: [
+                         Icon(Icons.person_outline),
+                         Text("Add new User")
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:BorderRadius.circular(5)
+                      )
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+             TextField(
+            decoration: InputDecoration(
+              hintText: "Search",
+              fillColor: Color(0xffF2F2F7),
+              filled: true,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(
+                  color: Color(0xffF2F2F7)
+                ),
+                
+                
+              ),
+              prefixIcon: Icon(Icons.search)
+              
+          )
+          ),
+          SizedBox(
+            height: 15,
+          ),
+            Divider(
+              thickness: 1,
+              color: Colors.grey,
+          ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: _user.length,
+                itemBuilder: (BuildContext context,int index){
+                  return ListTile(
+                leading: 
+                    
+                CircleAvatar(
+                radius: 40,
+                backgroundImage: NetworkImage("${_user[index]["profile_image"]}")
+                ),
+                title: Text("${_user[index]["full_name"]}"),
+                subtitle: Text("${_user[index]["email"]}"),
+                trailing:  ElevatedButton(
+                  child: Text(
+                    'Remove',
+                    style: TextStyle(
+                      color: Colors.black
+                    ),
+                    ), 
+                  onPressed: () {
+                    _showDialog(context);
+                  },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
+                    primary:Color(0xffF2F2F7).withOpacity(0.52),
                     shape: RoundedRectangleBorder(
-                      borderRadius:BorderRadius.circular(5)
+                      borderRadius: BorderRadius.circular(5)
                     )
                   ),
                 )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-           TextField(
-          decoration: InputDecoration(
-            hintText: "Search",
-            fillColor: Color(0xffF2F2F7),
-            filled: true,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(6),
-              borderSide: BorderSide(
-                color: Color(0xffF2F2F7)
-              ),
-              
-              
-            ),
-            prefixIcon: Icon(Icons.search)
-            
-        )
-        ),
-        SizedBox(
-          height: 15,
-        ),
-          Divider(
-            thickness: 1,
-            color: Colors.grey,
-        ),
-        Expanded(
-          child: ListView.builder(
-              itemCount: _user.length,
-              itemBuilder: (BuildContext context,int index){
-                return ListTile(
-              leading: 
-                  
-              CircleAvatar(
-              radius: 40,
-              backgroundImage: NetworkImage("${_user[index]["profile_image"]}")
-              ),
-              title: Text("${_user[index]["full_name"]}"),
-              subtitle: Text("${_user[index]["email"]}"),
-              trailing:  ElevatedButton(
-                child: Text(
-                  'Remove',
-                  style: TextStyle(
-                    color: Colors.black
-                  ),
-                  ), 
-                onPressed: () {
-                  _showDialog(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  primary:Color(0xffF2F2F7).withOpacity(0.52),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)
-                  )
+                );
+                }
                 ),
-              )
-              );
-              }
-              ),
-             ),
-                  
-        ],
+               ),
+                    
+          ],
+        ),
       ),
     );
   }
