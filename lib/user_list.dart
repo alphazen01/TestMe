@@ -28,6 +28,9 @@ class _UserListState extends State<UserList> {
        print("_user:$_user");
     });
   }
+  int countTotalUser(List _user){
+    return _user.length;
+  }
   @override
   void initState() {
    getUser();
@@ -83,7 +86,7 @@ class _UserListState extends State<UserList> {
                       ),
                     ),
                     Text(
-                      "15",
+                      "${(countTotalUser)(_user)}",
                       style: TextStyle(
                         fontSize: 14
                       ),
