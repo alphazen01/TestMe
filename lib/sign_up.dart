@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/login.dart';
-import 'package:demo/profile.dart';
+import 'package:demo/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
@@ -133,7 +133,7 @@ TextEditingController emailController = TextEditingController();
                     children: [
                       TextButton(
                        onPressed: (){
-                         Navigator.pop(context, ProfileScreen.path);
+                         Navigator.pop(context, WelcomeScreen.path);
                        }, 
                        child: Row(
                          children: [
@@ -160,7 +160,7 @@ TextEditingController emailController = TextEditingController();
                         backgroundImage :  FileImage(imagePath) 
                       ) : CircleAvatar(
                         radius: 60,
-                        backgroundImage :  AssetImage("assets/pubg.jpg")  
+                        backgroundImage :  AssetImage("assets/profile_avatar.png")  
                       ),
                            Transform.translate(
                         offset: Offset(

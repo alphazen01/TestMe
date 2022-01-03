@@ -5,9 +5,9 @@ import 'package:demo/sign_up.dart';
 // import 'package:demo/sign_up.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
   static final String path="ProfileScreen";
-  const ProfileScreen({ Key? key }) : super(key: key);
+  const WelcomeScreen({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

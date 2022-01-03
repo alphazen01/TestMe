@@ -3,7 +3,7 @@
 
 import 'package:demo/login.dart';
 import 'package:demo/new_user.dart';
-import 'package:demo/profile.dart';
+import 'package:demo/screens/welcome.dart';
 import 'package:demo/profile_bio.dart';
 import 'package:demo/sign_up.dart';
 import 'package:demo/user_list.dart';
@@ -34,10 +34,10 @@ class MyApp extends StatelessWidget {
     //  home: ProfileBio(),
     //  home: UserList(),
     //  home: AddNewUser(),
-    home: const ProfileScreen() ,
-     initialRoute: ProfileScreen.path,
+    
+     initialRoute: WelcomeScreen.path,
      routes: {
-       ProfileScreen.path:(context)=>ProfileScreen(),
+       WelcomeScreen.path:(context)=>WelcomeScreen(),
        TextFieldLogIn.path:(context)=>TextFieldLogIn(),
        TextFieldSignUp.path:(context)=>TextFieldSignUp(),
        ProfileBio.path:(context)=>ProfileBio(),
