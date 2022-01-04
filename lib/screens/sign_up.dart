@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo/login.dart';
+import 'package:demo/screens/login.dart';
 import 'package:demo/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +18,7 @@ class TextFieldSignUp extends StatefulWidget {
   static final String path="TextFieldSignUp";
   final TextEditingController?controller;
   final String?onTap;
+  
   const TextFieldSignUp({ Key? key,
   this.controller,this.onTap }) : super(key: key);
   
@@ -26,8 +27,7 @@ class TextFieldSignUp extends StatefulWidget {
 }
 
 class _TextFieldSignUpState extends State<TextFieldSignUp> {
-  
-  
+  bool isHiddenPassword=true;
   bool isLoading=false;
   var imagePath;
   var imageUrl;
@@ -229,7 +229,7 @@ TextEditingController emailController = TextEditingController();
                     TextField(
                       controller: passwordController,
                        keyboardType: TextInputType.text,
-                       obscureText: true,
+                       obscureText: isHiddenPassword,
                        obscuringCharacter: "*",
                        decoration: InputDecoration(
                         hintText: "Password",
@@ -238,8 +238,15 @@ TextEditingController emailController = TextEditingController();
                             color:  Color(0xffF2F2F7),
                             child: InkWell(
                               child: IconButton(
-                                onPressed: (){}, 
-                                icon: Icon(Icons.visibility)
+                                onPressed: (){
+                                  setState(() {
+                                    isHiddenPassword=!isHiddenPassword;
+                                  });
+                                }, 
+                                icon: Icon(
+                                  isHiddenPassword? Icons.visibility_off_rounded
+                               :Icons.visibility, 
+                                )
                               ),
                             ),
                           ),
