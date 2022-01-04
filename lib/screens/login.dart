@@ -1,21 +1,22 @@
 
 import 'package:demo/bottom_navigation.dart';
 import 'package:demo/screens/welcome.dart';
-import 'package:demo/sign_up.dart';
+import 'package:demo/screens/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldLogIn extends StatefulWidget {
   static final String path="TextFieldLogIn";
   final VoidCallback?onTap;
-  const TextFieldLogIn({ Key? key,this.onTap}) : super(key: key);
+  
+  const TextFieldLogIn({ Key? key,this.onTap,}) : super(key: key);
 
   @override
   State<TextFieldLogIn> createState() => _TextFieldLogInState();
 }
 
 class _TextFieldLogInState extends State<TextFieldLogIn> {
-
+ bool isHiddenPassword=true;
  bool isLoading=false;
   Future signIn()async{
     setState(() {
@@ -129,7 +130,7 @@ class _TextFieldLogInState extends State<TextFieldLogIn> {
                    TextField(
                      controller: passwordController,
                      keyboardType: TextInputType.text,
-                     obscureText: true,
+                     obscureText: isHiddenPassword,
                      obscuringCharacter: "*",
                      decoration: InputDecoration(
                       hintText: "Password",
@@ -138,8 +139,15 @@ class _TextFieldLogInState extends State<TextFieldLogIn> {
                           color:  Color(0xffF2F2F7),
                           child: InkWell(
                             child: IconButton(
-                              onPressed: (){}, 
-                              icon: Icon(Icons.visibility)
+                              onPressed: (){
+                                setState(() {
+                                 isHiddenPassword=!isHiddenPassword;
+                                });
+                              }, 
+                              icon: Icon(
+                               isHiddenPassword? Icons.visibility_off_rounded
+                               :Icons.visibility,
+                               )
                             ),
                           ),
                         ),

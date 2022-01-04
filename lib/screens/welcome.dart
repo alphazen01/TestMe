@@ -1,7 +1,7 @@
 
 
-import 'package:demo/login.dart';
-import 'package:demo/sign_up.dart';
+import 'package:demo/screens/login.dart';
+import 'package:demo/screens/sign_up.dart';
 // import 'package:demo/sign_up.dart';
 import 'package:flutter/material.dart';
 
@@ -35,27 +35,29 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                 ),
               ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 110),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(5)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      child: Center(
-                        child: Text(
-                          "  USER AUTHENTICA",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 19,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(5)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(7),
+                        child: Center(
+                          child: Text(
+                            "USER  AUTHENTICA",
+                            style: TextStyle(
+
+                              color: Colors.white,
+                              fontSize: 19,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
                 SizedBox(
                   height: 40,

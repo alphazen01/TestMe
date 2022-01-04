@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo/login.dart';
+import 'package:demo/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -217,10 +217,8 @@ TextEditingController emailController = TextEditingController();
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
                                 color: Color(0xffF2F2F7)
-                              ),
-                              
                             ),
-                            
+                          ),    
                         )
                         ),
                         SizedBox(
