@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static final String path="ProfileScreen";
-  const WelcomeScreen({ Key? key }) : super(key: key);
+  const WelcomeScreen({ Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

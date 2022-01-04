@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/new_user.dart';
+import 'package:demo/widgets/custom_alert.dart';
 import 'package:flutter/material.dart';
 
 class UserList extends StatefulWidget {
@@ -20,12 +21,15 @@ class _UserListState extends State<UserList> {
     });
   }
 
-  List _user=[];
+  List<QueryDocumentSnapshot<Object?>> _user=[];
   Future getUser()async{
    CollectionReference instance=  FirebaseFirestore.instance.collection('users');
    instance .get().then((QuerySnapshot querySnapshot) {
        _user =querySnapshot.docs;
        print("_user:$_user");
+       setState(() {
+         
+       });
     });
   }
   int countTotalUser(List user){
@@ -35,6 +39,10 @@ class _UserListState extends State<UserList> {
   void initState() {
    getUser();
     super.initState();
+  }
+  Future removeUser(String id)async{
+   await FirebaseFirestore.instance.collection('users').doc(id).delete();
+   getUser();
   }
 
 
@@ -165,7 +173,16 @@ class _UserListState extends State<UserList> {
                     ),
                     ), 
                   onPressed: () {
-                    _showDialog(context);
+                    showDialog(
+                        barrierDismissible: false,
+                        context: context, 
+                        builder:(BuildContext context){
+                          return CustomAlert(
+                            onTap: removeUser,
+                            id: _user[index].id,
+                          );
+                        } ,
+                          );
                   },
                   style: ElevatedButton.styleFrom(
                     primary:Color(0xffF2F2F7).withOpacity(0.52),
@@ -186,42 +203,5 @@ class _UserListState extends State<UserList> {
   }
 }
 
-_showDialog(BuildContext context){
-  showDialog(
-    barrierDismissible: false,
-  context: context, 
-  builder:(BuildContext context){
-    return AlertDialog(
-    title: Text("are you sure ?"),
-    
-    
-    actions: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ElevatedButton(
-            onPressed: (){
-             Navigator.pop(context);
-            }, 
-            child: Text("Cancel"),
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xffC4C4C4).withOpacity(0.52)
-            ),
-            ),
-            ElevatedButton(
-        onPressed: (){
-          
-        }, 
-        child: Text("Confirm"),
-         style: ElevatedButton.styleFrom(
-          primary: Color(0xffEA4242).withOpacity(0.52)
-            ),
-        ),
-        ],
-      ),
-         
-    ],
-    );
-  } ,
-    );
-  }
+
+

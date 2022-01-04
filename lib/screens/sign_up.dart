@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/screens/login.dart';
 import 'package:demo/screens/welcome.dart';
+import 'package:demo/widgets/custom_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,17 +26,15 @@ class TextFieldSignUp extends StatefulWidget {
   @override
   State<TextFieldSignUp> createState() => _TextFieldSignUpState();
 }
-
 class _TextFieldSignUpState extends State<TextFieldSignUp> {
   bool isHiddenPassword=true;
   bool isLoading=false;
   var imagePath;
   var imageUrl;
   String _value="Male";
-
-TextEditingController emailController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController =TextEditingController();
-   TextEditingController nameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
 
 
@@ -169,6 +168,8 @@ TextEditingController emailController = TextEditingController();
                         child: ElevatedButton(
                            onPressed: () {
                              pickedImage();
+                           
+                            
                            },
                           child: Icon(
                             Icons.camera_alt,
@@ -385,4 +386,3 @@ TextEditingController emailController = TextEditingController();
     );
   }
 }
-

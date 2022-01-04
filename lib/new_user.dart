@@ -16,6 +16,7 @@ class NewUser extends StatefulWidget {
 }
 
 class _NewUserState extends State<NewUser> {
+  bool isHiddenPassword=true;
  bool isLoading=false;
   var imagePath;
   var imageUrl;
@@ -227,7 +228,7 @@ TextEditingController emailController = TextEditingController();
                         TextField(
                           controller: passwordController,
                            keyboardType: TextInputType.text,
-                           obscureText: true,
+                           obscureText: isHiddenPassword,
                            obscuringCharacter: "*",
                            decoration: InputDecoration(
                             hintText: "Password",
@@ -236,8 +237,15 @@ TextEditingController emailController = TextEditingController();
                                 color:  Color(0xffF2F2F7),
                                 child: InkWell(
                                   child: IconButton(
-                                    onPressed: (){}, 
-                                    icon: Icon(Icons.visibility)
+                                    onPressed: (){
+                                      setState(() {
+                                        isHiddenPassword=!isHiddenPassword;
+                                      });
+                                    }, 
+                                    icon: Icon(
+                                       isHiddenPassword? Icons.visibility_off_rounded
+                                       :Icons.visibility,
+                                    )
                                   ),
                                 ),
                               ),
