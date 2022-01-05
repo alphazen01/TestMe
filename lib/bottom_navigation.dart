@@ -1,4 +1,5 @@
 import 'package:demo/profile_bio.dart';
+import 'package:demo/screens/welcome.dart';
 import 'package:demo/user_list.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
      Colors.white
    ];
    List<Widget>screens=[
-     Container(
-        width: double.infinity,
-     height: double.infinity,
-       color: Colors.red,
-     ),
+     WelcomeScreen(),
      UserList(),
      ProfileBio()
     

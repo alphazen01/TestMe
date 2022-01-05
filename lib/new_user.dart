@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/screens/login.dart';
+import 'package:demo/widgets/custom_source.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class NewUser extends StatefulWidget {
   @override
   State<NewUser> createState() => _NewUserState();
 }
-
 class _NewUserState extends State<NewUser> {
   bool isHiddenPassword=true;
  bool isLoading=false;
@@ -26,7 +26,6 @@ TextEditingController emailController = TextEditingController();
   TextEditingController passwordController =TextEditingController();
    TextEditingController nameController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
-
 
  Future signUp()async{
     setState(() {
@@ -61,18 +60,30 @@ TextEditingController emailController = TextEditingController();
   }
  
   
-  Future pickedImage()async{
+  Future pickGalleryImage() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile?image=await _picker.pickImage(
-      source: ImageSource.gallery
-      );
-  if(image !=null){
-    setState(() {
-      imagePath=File(image.path);
-    });
-    uploadProfileImage();
+    //   source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        imagePath = File(image.path);
+      });
+      uploadProfileImage();
+    }
   }
+
+  Future pickCameraImage() async {
+    final ImagePicker _picker = ImagePicker();
+    //   source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    if (image != null) {
+      setState(() {
+        imagePath = File(image.path);
+      });
+      uploadProfileImage();
+    }
   }
+
   
     Future uploadProfileImage() async {
       String image = imagePath.toString();
@@ -119,22 +130,6 @@ TextEditingController emailController = TextEditingController();
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Row(
-              children: [
-                Icon(Icons.arrow_back_ios,color: Colors.blue,),
-                Text(
-                  "Back",
-                   style: TextStyle(
-                   color: Colors.blue
-              ),
-                )
-              ],
-            ),
-          ),
           title: Text(
             "Add new User",
             style: TextStyle(
@@ -170,7 +165,14 @@ TextEditingController emailController = TextEditingController();
                         offset: Offset(-5,90),
                        child: ElevatedButton(
                            onPressed: () {
-                             pickedImage();
+                            //  pickedImage();
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => ImagePickerDialog(
+                                pickCameraImage: pickCameraImage,
+                                pickGalleryImage: pickGalleryImage,
+                              ),
+                            );
                            },
                           child: Icon(
                             Icons.camera_alt,
