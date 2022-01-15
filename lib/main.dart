@@ -9,7 +9,6 @@ import 'package:demo/screens/welcome.dart';
 import 'package:demo/profile_bio.dart';
 import 'package:demo/screens/sign_up.dart';
 import 'package:demo/user_list.dart';
-import 'package:demo/widgets/custom_source.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
  Future<void> main()async {

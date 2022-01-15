@@ -51,22 +51,7 @@ class _UserListState extends State<UserList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
-          child: Row(
-            children: [
-              Icon(Icons.arrow_back_ios,color: Colors.blue,),
-              Text(
-              "Back",
-              style: TextStyle(
-                color:Colors.blue,
-              ),
-            ), 
-            ],
-          ),
-        ),
+        
         centerTitle: true,
         title: Text(
             "User List",
@@ -157,6 +142,7 @@ class _UserListState extends State<UserList> {
                 itemCount: _user.length,
                 itemBuilder: (BuildContext context,int index){
                   return ListTile(
+                    onTap: (){},
                 leading: 
                     
                 CircleAvatar(
