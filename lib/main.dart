@@ -1,8 +1,5 @@
 
 
-
-
-
 import 'package:demo/screens/login.dart';
 import 'package:demo/new_user.dart';
 import 'package:demo/screens/welcome.dart';
