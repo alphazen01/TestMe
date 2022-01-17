@@ -1,5 +1,8 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/new_user.dart';
+import 'package:demo/profile_bio.dart';
 import 'package:demo/widgets/custom_alert.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +54,22 @@ class _UserListState extends State<UserList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Row(
+            children: [
+              Icon(Icons.arrow_back_ios,color: Colors.blue,),
+              Text(
+              "Back",
+              style: TextStyle(
+                color:Colors.blue,
+              ),
+            ), 
+            ],
+          ),
+        ),
         centerTitle: true,
         title: Text(
             "User List",
@@ -142,7 +160,12 @@ class _UserListState extends State<UserList> {
                 itemCount: _user.length,
                 itemBuilder: (BuildContext context,int index){
                   return ListTile(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileBio(
+                        name:_user[index]["full_name"],email: _user[index]["email"],)
+                        )
+                        );
+                    },
                 leading: 
                     
                 CircleAvatar(

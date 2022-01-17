@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class ProfileBio extends StatefulWidget {
   static final String path="ProfileBio";
+  final String?name;
+  final String?email;
+  
 
-  const ProfileBio({ Key? key }) : super(key: key);
+  const ProfileBio({ Key? key,this.name,this.email, }) : super(key: key);
 
   @override
   State<ProfileBio> createState() => _ProfileBioState();
@@ -43,14 +46,14 @@ class _ProfileBioState extends State<ProfileBio> {
               height: 24,
             ),
             Text(
-              "Mr. John Doe",
+              widget.name??"Mr. John Doe",
                style: TextStyle(fontSize: 36),
             ),
             SizedBox(
               height: 15,
             ),
              Text(
-              "email@email.com",
+              widget.name??"email@email.com",
                style: TextStyle(fontSize: 16),
             ),
             SizedBox(
