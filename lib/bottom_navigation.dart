@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/profile_bio.dart';
 import 'package:demo/screens/welcome.dart';
 import 'package:demo/user_list.dart';
@@ -14,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
    int selectedIndex=1;
      List<Color>clr=[
-     Colors.red,
+     Colors.black,
      Colors.white,
      Colors.white
    ];
@@ -25,31 +24,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
     
    ];
 
- List<QueryDocumentSnapshot<Object?>> _user=[];
-  Future getUser()async{
-   CollectionReference instance=  FirebaseFirestore.instance.collection('users');
-   instance .get().then((QuerySnapshot querySnapshot) {
-       _user =querySnapshot.docs;
-       print("_user:$_user");
-       setState(() {
-         
-       });
-    });
-  }
-  int countTotalUser(List user){
-    return user.length;
-  }
-  @override
-  void initState() {
-   getUser();
-    super.initState();
-  }
 
 
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
+     backgroundColor: clr[selectedIndex],
       body: screens.elementAt(selectedIndex),
       
               bottomNavigationBar: ClipRRect(
