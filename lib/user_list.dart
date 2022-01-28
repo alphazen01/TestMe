@@ -54,22 +54,6 @@ class _UserListState extends State<UserList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
-          child: Row(
-            children: [
-              Icon(Icons.arrow_back_ios,color: Colors.blue,),
-              Text(
-              "Back",
-              style: TextStyle(
-                color:Colors.blue,
-              ),
-            ), 
-            ],
-          ),
-        ),
         centerTitle: true,
         title: Text(
             "User List",
