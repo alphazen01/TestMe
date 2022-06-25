@@ -1,9 +1,18 @@
+
+
+import 'package:demo/screens/login.dart';
+import 'package:demo/screens/welcome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileBio extends StatefulWidget {
   static final String path="ProfileBio";
   final String?name;
   final String?email;
+
   
 
   const ProfileBio({ Key? key,this.name,this.email, }) : super(key: key);
@@ -13,6 +22,30 @@ class ProfileBio extends StatefulWidget {
 }
 
 class _ProfileBioState extends State<ProfileBio> {
+
+      bool isLoading=false;
+      
+ logout()async{
+  setState(() {
+    isLoading=true;
+  });
+ await  FirebaseAuth.instance.signOut();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+prefs.remove("email");
+ 
+ Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>TextFieldLogIn()));
+setState(() {
+  isLoading=false;
+});
+ }
+  //  final FirebaseAuth auth = FirebaseAuth.instance;
+  // //signout function 
+  // signOut() async {
+  //   await auth.signOut();
+  //   Navigator.pushReplacement(
+  //       context, MaterialPageRoute(builder: (context) => TextFieldLogIn()));
+  // }
+   
    int selectedIndex=0;
   //  List<Color>clr=[
   //    Colors.green,
@@ -22,8 +55,26 @@ class _ProfileBioState extends State<ProfileBio> {
   
   @override
   Widget build(BuildContext context) {
+
     return Scaffold( 
       // backgroundColor: clr[selectedIndex],
+      appBar: AppBar(
+        actions: [
+         isLoading?CircularProgressIndicator(
+          color: Colors.red,
+         ): ElevatedButton.icon(
+            label:Text("Log Out") ,
+            onPressed: (){
+             logout();
+            }, 
+            // onPressed: (){
+            //   signOut();
+            // },
+            icon: Icon(Icons.logout),
+            
+          )
+        ],
+      ),
       body: SafeArea(
       child: SingleChildScrollView(
         child: Column(
