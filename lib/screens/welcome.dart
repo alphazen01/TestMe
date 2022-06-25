@@ -72,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   child:TextButton(
                       onPressed: (){
-                        Navigator.pushNamed(context, TextFieldLogIn.path);
+                         Navigator.push(context, MaterialPageRoute(builder: (_)=>TextFieldLogIn()));
                       }, 
                       child:  Text(
                     "Login",
@@ -96,7 +96,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   child:  TextButton(
                         onPressed: (){
-                         Navigator.pushNamed(context, TextFieldSignUp.path);
+                         Navigator.push(context, MaterialPageRoute(builder: (_)=>TextFieldSignUp()));
                         }, 
                         child:  Text(
                       "Sign up",

@@ -4,6 +4,7 @@ import 'package:demo/screens/welcome.dart';
 import 'package:demo/screens/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TextFieldLogIn extends StatefulWidget {
   static final String path="TextFieldLogIn";
@@ -16,6 +17,7 @@ class TextFieldLogIn extends StatefulWidget {
 }
 
 class _TextFieldLogInState extends State<TextFieldLogIn> {
+   final FirebaseAuth _auth = FirebaseAuth.instance;
  bool isHiddenPassword=true;
  bool isLoading=false;
   Future signIn()async{
@@ -23,11 +25,11 @@ class _TextFieldLogInState extends State<TextFieldLogIn> {
       isLoading=true;
     });
     try{
-    UserCredential userCredential = await
-    FirebaseAuth.instance.signInWithEmailAndPassword(
-    email: emailController.text,
-    password: passwordController.text
-  );
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('email', 'useremail@gmail.com');
+   UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
   if(userCredential.user != null){
     Route route =MaterialPageRoute(builder: (ctx)=>BottomNavigation());
     Navigator.push(context, route);

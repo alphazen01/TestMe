@@ -1,5 +1,4 @@
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/new_user.dart';
 import 'package:demo/profile_bio.dart';
@@ -154,7 +153,7 @@ class _UserListState extends State<UserList> {
                     
                 CircleAvatar(
                 radius: 40,
-                backgroundImage: NetworkImage("${_user[index]["profile_image"]}")
+                backgroundImage:_user[index]["profile_image"]==null?null: NetworkImage(_user[index]["profile_image"])
                 ),
                 title: Text("${_user[index]["full_name"]}"),
                 subtitle: Text("${_user[index]["email"]}"),
